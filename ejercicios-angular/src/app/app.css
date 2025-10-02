@@ -1,0 +1,89 @@
+/* Estilos principales de la aplicación */
+.main-content {
+  margin-top: 76px; /* Altura de la navbar fija */
+  min-height: calc(100vh - 76px - 60px); /* Altura viewport menos navbar y footer */
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding-bottom: 80px; /* Espacio para el footer */
+}
+
+.footer {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: white;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+.footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Mejoras globales */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Animaciones suaves para transiciones */
+* {
+  box-sizing: border-box;
+}
+
+/* Estilos para cards globales */
+.card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.card-header {
+  border: none;
+  border-radius: 15px 15px 0 0 !important;
+  padding: 1.25rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Botones mejorados */
+.btn {
+  border-radius: 10px;
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+}
+
+.btn-lg {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* Inputs mejorados */
+.form-control {
+  border-radius: 10px;
+  border: 2px solid #e9ecef;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .main-content {
+    margin-top: 65px;
+    padding-bottom: 60px;
+  }
+
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

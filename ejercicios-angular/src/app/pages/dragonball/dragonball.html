@@ -1,0 +1,46 @@
+<h1>Goku!</h1>
+
+<hr>
+
+<section class="row">
+    <div class="col-12 col-sm-6">
+        <h3>Agregar: </h3>
+        <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Nombre"
+            [value]="nombre()"
+            (input)="nombre.set(txtName.value)"
+            #txtName
+        >
+        <input 
+            type="number" 
+            class="form-control mt-2" 
+            placeholder="Poder"
+            [value]="poder()"
+            (input)="poder.set(+numberPower.value)"
+            #numberPower
+        >
+        <button class="mt-2 btn btn-primary"
+            (click)="addCharacter()">
+        Guardar</button>
+    </div>
+    <div class="col-12 col-sm-6">
+        <h3>Listado</h3>
+        <ul>
+            @for(character of characters(); track character.id; let idx = $index){
+                <li>
+                    <span>{{idx+1}}: {{ character.nombre }} -></span> 
+                    <!--
+                    <span 
+                        [class.text-danger]="character.poder > 8000"
+                        [class.text-info]="character.poder < 8000"
+                        >{{ character.poder }}
+                    </span>
+                    -->
+                    <span [ngClass]="powerClass()">{{ character.poder }}</span>
+                </li>
+            }           
+        </ul>
+    </div>
+</section>

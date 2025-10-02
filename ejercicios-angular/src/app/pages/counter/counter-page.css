@@ -1,0 +1,12 @@
+* {
+    font-family: sans-serif;
+    background-color: transparent;
+}
+
+h1 {
+    color: orange;
+}
+
+button {
+    margin: 5px;
+}

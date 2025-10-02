@@ -1,0 +1,56 @@
+/* Estilos para Dragon Ball Super */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.btn {
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.input-group-text {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+/* Animación para el título */
+.display-4 {
+  background: linear-gradient(45deg, #0d6efd, #6610f2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 0.8; }
+  to { opacity: 1; }
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+}
+
+h1 {
+    font-family: sans-serif;
+}
