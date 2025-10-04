@@ -1,8 +1,10 @@
+<!-- Importar el componente -->
+ 
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 text-center">
             <h1 class="display-4 text-primary fw-bold">
-                <i class="fas fa-dragon"></i> Dragon Ball Super
+                <i class="fa-solid fa-dragon"></i> Dragon Ball Super
             </h1>
             <p class="lead text-muted">Gestiona tu lista de guerreros Z</p>
         </div>
@@ -11,64 +13,7 @@
     <div class="row g-4">
         <!-- Formulario para agregar personajes -->
         <div class="col-12 col-lg-5">
-            <div class="card shadow-sm h-100">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="card-title mb-0">
-                        <i class="fas fa-user-plus"></i> Agregar Guerrero
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="nombreInput" class="form-label fw-semibold">Nombre del Guerrero</label>
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="fas fa-user"></i>
-                            </span>
-                            <input
-                                id="nombreInput"
-                                type="text"
-                                class="form-control"
-                                placeholder="Ej: Goku, Vegeta..."
-                                [value]="nombre()"
-                                (input)="nombre.set(txtName.value)"
-                                #txtName
-                                required
-                            >
-                        </div>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="poderInput" class="form-label fw-semibold">Nivel de Poder</label>
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="fas fa-bolt"></i>
-                            </span>
-                            <input
-                                id="poderInput"
-                                type="number"
-                                class="form-control"
-                                placeholder="Ej: 9000"
-                                min="1"
-                                [value]="poder()"
-                                (input)="poder.set(+numberPower.value)"
-                                #numberPower
-                                required
-                            >
-                        </div>
-                        <div class="form-text">
-                            <small>Ingresa un número mayor a 0</small>
-                        </div>
-                    </div>
-
-                    <div class="d-grid">
-                        <button
-                            class="btn btn-primary btn-lg"
-                            (click)="addCharacter()">
-                            <i class="fas fa-plus-circle"></i> Agregar Guerrero
-                        </button>
-                    </div>
-                </div>
-            </div>
+          <app-character-add />
         </div>
 
         <!-- Lista de personajes -->
@@ -76,7 +21,7 @@
             <div class="card shadow-sm h-100">
                 <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0">
-                        <i class="fas fa-list"></i> Lista de Guerreros
+                        <i class="fa-solid fa-list"></i> Lista de Guerreros
                     </h5>
                     <span class="badge bg-light text-dark">{{ characters().length }} guerreros</span>
                 </div>
