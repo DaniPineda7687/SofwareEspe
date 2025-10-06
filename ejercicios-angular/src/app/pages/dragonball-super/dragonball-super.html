@@ -1,36 +1,16 @@
-<!-- Importar el componente -->
- 
 <div class="container-fluid">
-    <div class="row mb-4">
-        <div class="col-12 text-center">
-            <h1 class="display-4 text-primary fw-bold">
-                <i class="fa-solid fa-dragon"></i> Dragon Ball Super
-            </h1>
-            <p class="lead text-muted">Gestiona tu lista de guerreros Z</p>
-        </div>
-    </div>
+    <h1 class="text-primary mb-3">
+        <i class="fas fa-dragon me-2"></i>Goku!
+    </h1>
 
-    <div class="row g-4">
-        <!-- Formulario para agregar personajes -->
-        <div class="col-12 col-lg-5">
-          <app-character-add />
-        </div>
+    <hr class="mb-4">
 
-        <!-- Lista de personajes -->
-        <div class="col-12 col-lg-7">
-            <div class="card shadow-sm h-100">
-                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-                    <h5 class="card-title mb-0">
-                        <i class="fa-solid fa-list"></i> Lista de Guerreros
-                    </h5>
-                    <span class="badge bg-light text-dark">{{ characters().length }} guerreros</span>
-                </div>
-                <div class="card-body">
-                    <dragonball-character-list
-                        [characters]="characters()"
-                        listName="Guerreros Z Registrados"/>
-                </div>
-            </div>
+    <section class="row g-4">
+        <div class="col-12 col-sm-6">
+            <dragonball-character-add [characters]="dragonballService.characters()" (newCharacter)="dragonballService.addCharacter($event)"/>
         </div>
-    </div>
+        <div class="col-12 col-sm-6">
+            <dragonball-character-list [characters]="dragonballService.characters()" listName="Lista Dragonball"/>
+        </div>
+    </section>
 </div>

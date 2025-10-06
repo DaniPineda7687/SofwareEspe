@@ -1,46 +1,65 @@
-<h1>Goku!</h1>
+<div class="container-fluid">
+    <h1 class="text-primary mb-3">
+        <i class="fas fa-dragon me-2"></i>Goku!
+    </h1>
 
-<hr>
+    <hr class="mb-4">
 
-<section class="row">
-    <div class="col-12 col-sm-6">
-        <h3>Agregar: </h3>
-        <input 
-            type="text" 
-            class="form-control" 
-            placeholder="Nombre"
-            [value]="nombre()"
-            (input)="nombre.set(txtName.value)"
-            #txtName
-        >
-        <input 
-            type="number" 
-            class="form-control mt-2" 
-            placeholder="Poder"
-            [value]="poder()"
-            (input)="poder.set(+numberPower.value)"
-            #numberPower
-        >
-        <button class="mt-2 btn btn-primary"
-            (click)="addCharacter()">
-        Guardar</button>
-    </div>
-    <div class="col-12 col-sm-6">
-        <h3>Listado</h3>
-        <ul>
-            @for(character of characters(); track character.id; let idx = $index){
-                <li>
-                    <span>{{idx+1}}: {{ character.nombre }} -></span> 
-                    <!--
-                    <span 
-                        [class.text-danger]="character.poder > 8000"
-                        [class.text-info]="character.poder < 8000"
-                        >{{ character.poder }}
-                    </span>
-                    -->
-                    <span [ngClass]="powerClass()">{{ character.poder }}</span>
-                </li>
-            }           
-        </ul>
-    </div>
-</section>
+    <section class="row g-4">
+        <div class="col-12 col-sm-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-plus me-2"></i>Agregar
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            placeholder="Nombre del personaje"
+                            [value]="nombre()"
+                            (input)="nombre.set(txtName.value)"
+                            #txtName
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <input
+                            type="number"
+                            class="form-control form-control-lg"
+                            placeholder="Nivel de poder"
+                            [value]="poder()"
+                            (input)="poder.set(+numberPower.value)"
+                            #numberPower
+                        >
+                    </div>
+                    <button class="btn btn-primary btn-lg w-100"
+                        (click)="addCharacter()">
+                        <i class="fas fa-save me-2"></i>Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-list me-2"></i>Listado
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        @for(character of characters(); track character.id; let idx = $index){
+                            <li class="mb-2 p-2 bg-light rounded">
+                                <span class="fw-bold">{{idx+1}}: {{ character.nombre }} →</span>
+                                <span [ngClass]="powerClass()" class="badge bg-secondary ms-2">{{ character.poder }}</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

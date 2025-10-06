@@ -1,0 +1,21 @@
+<h3>Agregar: </h3>
+    <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Nombre"
+        [value]="nombre()"
+        (input)="nombre.set(txtName.value)"
+        #txtName
+    >
+    <input 
+        type="number" 
+        class="form-control mt-2" 
+        placeholder="Poder"
+        [value]="poder()"
+        (input)="poder.set(+numberPower.value)"
+        #numberPower
+    >
+    <button class="mt-2 btn btn-primary"
+        (click)="addCharacter()">
+    Guardar</button>
+
