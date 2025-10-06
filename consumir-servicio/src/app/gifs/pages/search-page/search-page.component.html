@@ -1,3 +1,55 @@
-<p class="">
-  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur consequatur adipisci est ut velit soluta sint molestias ea natus sapiente et, voluptas earum nostrum nulla cupiditate. Odio quam eveniet officia.
-</p>
+<div class="max-w-7xl mx-auto">
+  <!-- Header -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Buscar GIFs</h1>
+  </div>
+
+  <gifs-search-form (onSearch)="onSearch($event)" />
+
+  <gifs-search-history
+    [searchHistory]="searchHistory()"
+    (onSearchFromHistory)="onSearchFromHistory($event)"
+    (onClearHistory)="onClearHistory()" />
+
+  @if(isLoading()) {
+    <div class="flex justify-center items-center py-12">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <span class="ml-3 text-gray-600">Buscando GIFs...</span>
+    </div>
+  }
+
+  @if(!isLoading() && searchGifs().length > 0) {
+    <div class="mb-4">
+      <h2 class="text-xl font-semibold text-gray-800">
+        Resultados de búsqueda ({{ searchGifs().length }})
+      </h2>
+    </div>
+    <gif-list [gifs]="searchGifs()" />
+  }
+
+  @if(!isLoading() && searchGifs().length === 0 && searchHistory().length > 0) {
+    <div class="text-center py-12">
+      <div class="text-6xl mb-4">🔍</div>
+      <h3 class="text-xl font-medium text-gray-900 mb-2">No se encontraron GIFs</h3>
+      <p class="text-gray-600">Intenta con diferentes palabras clave</p>
+    </div>
+  }
+
+  @if(!isLoading() && searchGifs().length === 0 && searchHistory().length === 0) {
+    <div class="text-center py-16">
+      <div class="text-8xl mb-6">🎉</div>
+      <h3 class="text-2xl font-medium text-gray-900 mb-4">¡Comienza a buscar!</h3>
+      <p class="text-gray-600 max-w-md mx-auto">
+        Usa el formulario de arriba para buscar tus GIFs favoritos.
+        Puedes buscar por emociones, personajes, animales, ¡lo que quieras!
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-2">
+        <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">gato</span>
+        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">feliz</span>
+        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">danza</span>
+        <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm">amor</span>
+        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">risa</span>
+      </div>
+    </div>
+  }
+</div>
