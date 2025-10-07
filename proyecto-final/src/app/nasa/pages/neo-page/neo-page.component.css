@@ -1,0 +1,42 @@
+/* NEO Page specific styles */
+.neo-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.neo-stat-card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.neo-stat-card:hover {
+  transform: scale(1.02);
+}
+
+/* Danger indicator styles */
+.danger-high {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border-color: #f87171;
+}
+
+.danger-low {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-color: #34d399;
+}
+
+/* Animation for asteroid detection */
+.asteroid-pulse {
+  animation: asteroidPulse 2s ease-in-out infinite;
+}
+
+@keyframes asteroidPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .neo-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,21 @@
+/* APOD Page specific styles */
+.apod-container {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .apod-container {
+    gap: 1rem;
+  }
+}
+
+/* Loading animation enhancement */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

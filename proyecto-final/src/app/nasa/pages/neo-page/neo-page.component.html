@@ -1,0 +1,123 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 p-6">
+
+    <div class="lg:col-span-1">
+      <app-side-menu></app-side-menu>
+    </div>
+
+
+    <div class="lg:col-span-4 space-y-6">
+
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="text-center">
+          <h1 class="text-3xl font-bold text-gray-800 mb-2">
+            ☄️ Objetos Cercanos a la Tierra (NEO)
+          </h1>
+          <p class="text-gray-600">
+            Monitorea asteroides y cometas que pasan cerca de nuestro planeta
+          </p>
+        </div>
+      </div>
+
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-center">
+          <div class="text-2xl mb-2">🌍</div>
+          <h3 class="font-semibold text-yellow-800 text-sm">Distancia</h3>
+          <p class="text-xs text-yellow-600">Medida en UA y kilómetros</p>
+        </div>
+        <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center">
+          <div class="text-2xl mb-2">⚡</div>
+          <h3 class="font-semibold text-orange-800 text-sm">Velocidad</h3>
+          <p class="text-xs text-orange-600">km/h relativa a la Tierra</p>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+          <div class="text-2xl mb-2">⚠️</div>
+          <h3 class="font-semibold text-red-800 text-sm">Peligrosidad</h3>
+          <p class="text-xs text-red-600">Clasificación de riesgo</p>
+        </div>
+        <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 text-center">
+          <div class="text-2xl mb-2">📏</div>
+          <h3 class="font-semibold text-purple-800 text-sm">Tamaño</h3>
+          <p class="text-xs text-purple-600">Diámetro estimado</p>
+        </div>
+      </div>
+
+
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <app-search-form
+          [config]="searchFormConfig"
+          [isLoading]="isLoading()"
+          (search)="onSearch($event)">
+        </app-search-form>
+      </div>
+
+
+      @if (isLoading()) {
+        <div class="bg-white rounded-lg shadow-md p-12">
+          <div class="text-center">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mb-4"></div>
+            <p class="text-gray-600">Detectando objetos cercanos...</p>
+          </div>
+        </div>
+      }
+
+
+      @if (!isLoading() && neoData().length > 0) {
+        <div class="bg-white rounded-lg shadow-md p-6">
+
+          <div class="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200">
+            <h3 class="text-lg font-semibold text-purple-800 mb-2">
+              📊 Resumen de Detección
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+              <div>
+                <div class="text-2xl font-bold text-purple-700">{{ neoData().length }}</div>
+                <div class="text-sm text-purple-600">Total NEOs</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-red-700">
+                  {{ getHazardousCount() }}
+                </div>
+                <div class="text-sm text-red-600">Peligrosos</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-green-700">
+                  {{ getSafeCount() }}
+                </div>
+                <div class="text-sm text-green-600">Seguros</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-blue-700">~</div>
+                <div class="text-sm text-blue-600">Promedio/día</div>
+              </div>
+            </div>
+          </div>
+
+          <app-data-list
+            [data]="neoData()"
+            [dataType]="'neo'">
+          </app-data-list>
+        </div>
+      }
+
+
+      @if (!isLoading() && neoData().length === 0) {
+        <div class="bg-white rounded-lg shadow-md p-12">
+          <div class="text-center">
+            <div class="text-6xl mb-4">🔍</div>
+            <h3 class="text-xl font-semibold text-gray-700 mb-2">
+              No se encontraron objetos
+            </h3>
+            <p class="text-gray-500 mb-4">
+              No hay objetos cercanos a la Tierra detectados para la fecha seleccionada
+            </p>
+            <div class="text-sm text-gray-400">
+              <p>💡 Tip: Prueba con fechas diferentes o un rango más amplio</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

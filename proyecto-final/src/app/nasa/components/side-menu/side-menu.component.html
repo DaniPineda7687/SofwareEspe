@@ -1,0 +1,49 @@
+<div class="bg-white rounded-lg shadow-md p-6 h-fit">
+
+  <div class="text-center mb-6 pb-4 border-b border-gray-200">
+    <h2 class="text-2xl font-bold text-gray-800 mb-2">
+      🚀 NASA Explorer
+    </h2>
+    <p class="text-sm text-gray-600">
+      Datos del cosmos
+    </p>
+  </div>
+
+
+  <nav class="space-y-2">
+    @for (option of menuOptions; track option.route) {
+      <a
+        [routerLink]="option.route"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: false }"
+        class="menu-item block p-3 rounded-lg transition-all duration-200 hover:bg-gray-50 group">
+
+        <div class="flex items-center space-x-3">
+          <span class="text-2xl">{{ option.icon }}</span>
+          <div class="flex-1">
+            <div class="font-medium text-gray-800 group-hover:text-blue-600">
+              {{ option.label }}
+            </div>
+            @if (option.description) {
+              <div class="text-xs text-gray-500 mt-1">
+                {{ option.description }}
+              </div>
+            }
+          </div>
+        </div>
+      </a>
+    }
+  </nav>
+
+
+  <div class="mt-8 pt-4 border-t border-gray-200 text-center">
+    <p class="text-xs text-gray-500">
+      Powered by NASA API
+    </p>
+    <div class="flex justify-center space-x-1 mt-2 text-lg">
+      <span>🛰️</span>
+      <span>🌍</span>
+      <span>🌙</span>
+    </div>
+  </div>
+</div>
