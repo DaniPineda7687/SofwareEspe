@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SideMenuComponent } from '../../components/side-menu/side-menu.component';
 import { SearchFormComponent } from '../../components/search-form/search-form.component';
 import { DataListComponent } from '../../components/data-list/data-list.component';
 import { NasaService } from '../../services/nasa.service';
@@ -13,7 +12,6 @@ import { NasaService } from '../../services/nasa.service';
   imports: [
     CommonModule,
     FormsModule,
-    SideMenuComponent,
     SearchFormComponent,
     DataListComponent
   ],
