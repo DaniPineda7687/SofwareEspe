@@ -7,29 +7,38 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterModule, CommonModule],
   templateUrl: './side-menu-options.component.html',
-  styles: ``
+  styleUrl: './side-menu-options.component.css'
 })
 export class SideMenuOptionsComponent {
-
   menuOptions = [
     {
+      label: 'Dashboard',
+      icon: '🏠',
+      route: '/nasa/dashboard'
+    },
+    {
       label: 'APOD',
-      description: 'Astronomy Picture of the Day',
-      route: '/dashboard/apod',
-      icon: '🌟'
+      icon: '🌌',
+      route: '/nasa/apod',
+      description: 'Imagen Astronómica del Día'
     },
     {
       label: 'Mars Rover',
-      description: 'Mars Rover Photos',
-      route: '/dashboard/mars-rover',
-      icon: '🔴'
+      icon: '🔴',
+      route: '/nasa/mars-rover',
+      description: 'Fotos de Marte'
     },
     {
       label: 'Near Earth Objects',
-      description: 'Asteroids & Comets',
-      route: '/dashboard/neo',
-      icon: '☄️'
+      icon: '☄️',
+      route: '/nasa/neo',
+      description: 'Objetos Cercanos'
+    },
+    {
+      label: 'InSight Weather',
+      icon: '🌡️',
+      route: '/nasa/insight',
+      description: 'Clima en Marte'
     }
   ];
-
 }

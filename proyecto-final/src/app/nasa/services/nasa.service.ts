@@ -5,11 +5,14 @@ import { environment } from '../../../environments/environment';
 import { ApodResponse } from '../interfaces/apod-interface';
 import { MarsRoverResponse } from '../interfaces/mars-rover-interface';
 import { NeoResponse } from '../interfaces/neo-interface';
+import { InsightWeatherResponse } from '../interfaces/insight-interface';
 import { Apod, MarsPhotoSimple, NeoSimple } from '../interfaces/nasa-models';
+import { InsightWeatherSimple } from '../interfaces/insight-models';
 
 import { ApodMapper } from '../mappers/apod-mapper';
 import { MarsRoverMapper } from '../mappers/mars-rover-mapper';
 import { NeoMapper } from '../mappers/neo-mapper';
+import { InsightMapper } from '../mappers/insight-mapper';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +25,7 @@ export class NasaService {
   apodData = signal<Apod[]>([]);
   marsPhotos = signal<MarsPhotoSimple[]>([]);
   neoData = signal<NeoSimple[]>([]);
+  insightWeather = signal<InsightWeatherSimple[]>([]);
   isLoading = signal<boolean>(false);
 
   constructor() {
@@ -186,6 +190,28 @@ export class NasaService {
     const today = new Date().toISOString().split('T')[0];
     const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().split('T')[0];
     this.loadNeoFeed(today, tomorrow);
+  }
+
+  loadInsightWeather() {
+    this.isLoading.set(true);
+
+    return this.http.get<InsightWeatherResponse>(`${this.environment.urlBase}/insight_weather/`, {
+      params: {
+        api_key: this.environment.apiKey,
+        feedtype: 'json',
+        ver: '1.0'
+      }
+    }).subscribe({
+      next: (response) => {
+        const weatherData = InsightMapper.mapInsightWeatherToSimple(response);
+        this.insightWeather.set(weatherData);
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.insightWeather.set([]);
+        this.isLoading.set(false);
+      }
+    });
   }
 
   formatDateForApi(date: Date): string {

@@ -27,6 +27,11 @@ export const NASA_ROUTES: Routes = [
         loadComponent: () => import('./pages/neo-page/neo-page.component').then(m => m.NeoPageComponent),
         title: 'NASA - Objetos Cercanos a la Tierra'
       },
+      {
+        path: 'insight',
+        loadComponent: () => import('./pages/insight-page/insight-page.component').then(m => m.InsightPageComponent),
+        title: 'NASA - InSight Mars Weather'
+      },
       { path: '**', redirectTo: 'dashboard' }
     ]
   }

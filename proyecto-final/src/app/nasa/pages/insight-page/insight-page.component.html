@@ -1,0 +1,158 @@
+<div class="space-y-6">
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="text-center">
+          <h1 class="text-3xl font-bold text-gray-800 mb-2">
+            🌡️ InSight: Mars Weather Service
+          </h1>
+          <p class="text-gray-600">
+            Datos meteorológicos en tiempo real desde Marte, proporcionados por el módulo InSight de la NASA
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="bg-gradient-to-br from-red-50 to-red-100 border border-red-200 rounded-lg p-4 text-center">
+          <div class="text-2xl mb-2">🌡️</div>
+          <h3 class="font-semibold text-red-800 text-sm">Temperatura</h3>
+          <p class="text-xs text-red-600">Promedio, mín y máx en °C</p>
+        </div>
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-4 text-center">
+          <div class="text-2xl mb-2">💨</div>
+          <h3 class="font-semibold text-blue-800 text-sm">Viento</h3>
+          <p class="text-xs text-blue-600">Velocidad horizontal en m/s</p>
+        </div>
+        <div class="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-lg p-4 text-center">
+          <div class="text-2xl mb-2">⏲️</div>
+          <h3 class="font-semibold text-purple-800 text-sm">Presión</h3>
+          <p class="text-xs text-purple-600">Atmosférica en Pa</p>
+        </div>
+        <div class="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-4 text-center">
+          <div class="text-2xl mb-2">🧭</div>
+          <h3 class="font-semibold text-green-800 text-sm">Dirección</h3>
+          <p class="text-xs text-green-600">Punto cardinal más común</p>
+        </div>
+      </div>
+
+      @if (isLoading()) {
+        <div class="bg-white rounded-lg shadow-md p-12">
+          <div class="text-center">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mb-4"></div>
+            <p class="text-gray-600">Recibiendo datos desde Marte...</p>
+          </div>
+        </div>
+      }
+
+      @if (!isLoading() && insightWeather().length > 0) {
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          @for (weather of insightWeather(); track weather.sol) {
+            <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden">
+              <div [class]="'bg-gradient-to-r p-4 border-b ' + getSeasonColor(weather.season)">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h3 class="text-xl font-bold text-gray-800">
+                      Sol {{ weather.sol }}
+                    </h3>
+                    <p class="text-sm text-gray-600">
+                      {{ getSeasonIcon(weather.season) }} {{ weather.season | titlecase }}
+                    </p>
+                  </div>
+                  <div class="text-4xl">
+                    🔴
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-4 space-y-3">
+                @if (weather.temperature) {
+                  <div class="flex items-start gap-3 p-3 bg-red-50 rounded-lg">
+                    <div class="text-2xl">🌡️</div>
+                    <div class="flex-1">
+                      <h4 class="font-semibold text-red-800 text-sm mb-1">Temperatura Atmosférica</h4>
+                      <div class="text-xs text-red-700 space-y-1">
+                        <p><strong>Promedio:</strong> {{ weather.temperature.average.toFixed(1) }}°C</p>
+                        <p><strong>Min:</strong> {{ weather.temperature.min.toFixed(1) }}°C |
+                           <strong>Max:</strong> {{ weather.temperature.max.toFixed(1) }}°C</p>
+                        <p class="text-red-600"><strong>Lecturas:</strong> {{ weather.temperature.count | number }}</p>
+                      </div>
+                    </div>
+                  </div>
+                }
+
+                @if (weather.windSpeed) {
+                  <div class="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+                    <div class="text-2xl">💨</div>
+                    <div class="flex-1">
+                      <h4 class="font-semibold text-blue-800 text-sm mb-1">Velocidad del Viento</h4>
+                      <div class="text-xs text-blue-700 space-y-1">
+                        <p><strong>Promedio:</strong> {{ weather.windSpeed.average.toFixed(2) }} m/s</p>
+                        <p><strong>Min:</strong> {{ weather.windSpeed.min.toFixed(2) }} m/s |
+                           <strong>Max:</strong> {{ weather.windSpeed.max.toFixed(2) }} m/s</p>
+                        <p class="text-blue-600"><strong>Lecturas:</strong> {{ weather.windSpeed.count | number }}</p>
+                      </div>
+                    </div>
+                  </div>
+                }
+
+                @if (weather.pressure) {
+                  <div class="flex items-start gap-3 p-3 bg-purple-50 rounded-lg">
+                    <div class="text-2xl">⏲️</div>
+                    <div class="flex-1">
+                      <h4 class="font-semibold text-purple-800 text-sm mb-1">Presión Atmosférica</h4>
+                      <div class="text-xs text-purple-700 space-y-1">
+                        <p><strong>Promedio:</strong> {{ weather.pressure.average.toFixed(2) }} Pa</p>
+                        <p><strong>Min:</strong> {{ weather.pressure.min.toFixed(2) }} Pa |
+                           <strong>Max:</strong> {{ weather.pressure.max.toFixed(2) }} Pa</p>
+                        <p class="text-purple-600"><strong>Lecturas:</strong> {{ weather.pressure.count | number }}</p>
+                      </div>
+                    </div>
+                  </div>
+                }
+
+                @if (weather.windDirection) {
+                  <div class="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                    <div class="text-2xl">🧭</div>
+                    <div class="flex-1">
+                      <h4 class="font-semibold text-green-800 text-sm mb-1">Dirección del Viento</h4>
+                      <div class="text-xs text-green-700 space-y-1">
+                        <p><strong>Más Común:</strong> {{ weather.windDirection.mostCommon }}</p>
+                        <p><strong>Grados:</strong> {{ weather.windDirection.compassDegrees }}°</p>
+                        <p class="text-green-600"><strong>Lecturas:</strong> {{ weather.windDirection.count | number }}</p>
+                      </div>
+                    </div>
+                  </div>
+                } @else {
+                  <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                    <div class="text-2xl">🧭</div>
+                    <div class="flex-1">
+                      <h4 class="font-semibold text-gray-600 text-sm">Dirección del Viento</h4>
+                      <p class="text-xs text-gray-500">Sin datos disponibles</p>
+                    </div>
+                  </div>
+                }
+
+                <div class="pt-2 border-t border-gray-200">
+                  <p class="text-xs text-gray-500">
+                    <strong>Periodo:</strong><br>
+                    {{ weather.firstUTC | date:'short' }} - {{ weather.lastUTC | date:'short' }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+
+      @if (!isLoading() && insightWeather().length === 0) {
+        <div class="bg-white rounded-lg shadow-md p-12">
+          <div class="text-center">
+            <div class="text-6xl mb-4">🔴</div>
+            <h3 class="text-xl font-semibold text-gray-700 mb-2">
+              No hay datos meteorológicos disponibles
+            </h3>
+            <p class="text-gray-500">
+              No se pudieron obtener datos del InSight Mars Weather Service
+            </p>
+          </div>
+        </div>
+      }
+    </div>

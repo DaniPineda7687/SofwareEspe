@@ -1,0 +1,43 @@
+/* Side Menu Options Styles */
+.menu-item {
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.menu-item:hover {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+.menu-item.active {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  border-color: #2563eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.menu-item.active .font-medium,
+.menu-item.active .text-gray-800 {
+  color: white !important;
+}
+
+.menu-item.active .text-gray-500,
+.menu-item.active .text-xs {
+  color: #e2e8f0 !important;
+}
+
+.menu-item.active .group-hover\:text-blue-600 {
+  color: white !important;
+}
+
+.menu-item:hover span {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .menu-item .text-xs {
+    display: none;
+  }
+}
